@@ -5,11 +5,14 @@
       <button class="button" @click="reset">Reset</button>
       <button class="button" @click="start">Start</button>
       <button class="button" @click="stop">Stop</button>
-      <a href="/fractals" class="link">fractals</a>
+      <router-link to="/fractals" class="link">fractals</router-link>
     </div>
     <div class="field-container">
       <div class="field" @mousedown="onFieldClick" @contextmenu.prevent>
-        <div class="row" :key="row" v-for="row in field">
+        <div class="row"
+             :key="row"
+             v-for="row in field"
+        >
           <div
               class="cell"
               :key="entity"
@@ -149,11 +152,9 @@ export default defineComponent({
           }
           if (countNeighborhoods < 2 || countNeighborhoods > 3) {
             entities.value[i][j] = getNewTypeEntity(entitiesValues.VOID, i, j);
-          }
-          else if (countNeighborhoods === 2 && entities.value[i][j].value === entitiesValues.ENTITY) {
+          } else if (countNeighborhoods === 2 && entities.value[i][j].value === entitiesValues.ENTITY) {
             entities.value[i][j] = getNewTypeEntity(entitiesValues.ENTITY, i, j);
-          }
-          else if (countNeighborhoods === 3) {
+          } else if (countNeighborhoods === 3) {
             entities.value[i][j] = getNewTypeEntity(entitiesValues.ENTITY, i, j);
           }
         }
@@ -174,7 +175,8 @@ export default defineComponent({
     });
 
     reset();
-    let updateInterval = setInterval(() => {}, 10000);
+    let updateInterval = setInterval(() => {
+    }, 10000);
     let isAutoUpdate = false;
 
     const start = () => {
